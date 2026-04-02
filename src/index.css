@@ -5,17 +5,16 @@
   --font-sans: "Outfit", ui-sans-serif, system-ui, sans-serif;
   --font-serif: "Playfair Display", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
 
-  --color-brand-bg: #F7FFE5;
-  --color-brand-green: #83ba36;
-  --color-brand-dark: #2a513f;
-  --color-brand-teal: #378e8e;
-  --color-brand-mint: #70e0bb;
+  --color-brand-bg: #F3EFE7;
+  --color-brand-surface: #E8E2D9;
+  --color-brand-green: #10B981;
+  --color-brand-green-hover: #0EA5E9;
+  --color-brand-dark: #111111;
+  --color-brand-accent: #D97706;
+}
 
-  --color-maton-light: #FDF8F0;
-  --color-maton-dark: #1A1A1A;
-  --color-maton-darker: #0A0A0A;
-  --color-maton-lime: #D4FF3F;
-  --color-maton-lime-hover: #C2F020;
+html {
+  scroll-behavior: smooth;
 }
 
 body {
@@ -28,4 +27,23 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-sans);
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 20s linear infinite;
+}
+
+@media (max-width: 767px) {
+  .animate-marquee {
+    animation-duration: 10s;
+  }
 }

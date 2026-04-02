@@ -1,0 +1,93 @@
+export const stories = [
+  {
+    id: 1,
+    name: "Anna Gunn, 7",
+    diagnosis: "Diagnosed with Stage 2 Brain Cancer",
+    raised: "$8,356.20",
+    goal: "$30,000.00",
+    percent: "28%",
+    progress: 28,
+    image: "https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?auto=format&fit=crop&w=800&q=80",
+    story: "Anna is a bright and creative young girl with a passion for painting. Despite the difficulties she faces, she continues to dream of one day becoming an artist. Art has always been her escape, and even in the toughest moments of her treatment, she uses it to express her feelings and find peace.",
+    journey: "Anna's journey began three months ago when she started experiencing persistent headaches. After several tests, she was diagnosed with Stage 2 Brain Cancer. Since then, she has undergone multiple rounds of chemotherapy and radiation. Despite the fatigue and pain, Anna remains incredibly resilient, always finding a reason to smile.",
+    dreams: "Anna's biggest dream is to visit the Louvre in Paris and see the Mona Lisa in person. She also hopes to have her own art exhibition one day, where she can share her paintings with the world and inspire other children going through similar challenges."
+  },
+  {
+    id: 2,
+    name: "Marcus Chen, 10",
+    diagnosis: "Diagnosed with Leukemia",
+    raised: "$12,450.00",
+    goal: "$27,600.00",
+    percent: "45%",
+    progress: 45,
+    image: "https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?auto=format&fit=crop&w=800&q=80",
+    story: "Marcus is an energetic and curious boy who loves science and astronomy. Before his diagnosis, he spent countless nights looking through his telescope, mapping the stars. His analytical mind and brave spirit have been his greatest assets as he navigates his treatment.",
+    journey: "Marcus was diagnosed with Leukemia after a routine checkup revealed abnormalities in his blood work. He has spent the last six months in and out of the hospital, undergoing intensive chemotherapy. The isolation has been tough, but his family and friends have rallied around him, bringing the universe to his hospital room through books and documentaries.",
+    dreams: "Marcus dreams of becoming an astrophysicist and working for NASA. He wants to discover a new planet and name it after his little sister. He also hopes to build a giant telescope in his backyard once he is fully recovered."
+  },
+  {
+    id: 3,
+    name: "Sophia Martinez, 12",
+    diagnosis: "Diagnosed with Type 1 Diabetes",
+    raised: "$5,200.00",
+    goal: "$34,600.00",
+    percent: "15%",
+    progress: 15,
+    image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=800&q=80",
+    story: "Sophia is a talented gymnast and a natural leader among her peers. Her sudden diagnosis brought significant changes to her active lifestyle, but she has tackled this new reality with the same discipline and grace she shows on the balance beam.",
+    journey: "The transition to managing Type 1 Diabetes has been a steep learning curve for Sophia and her family. From monitoring blood sugar levels to adjusting her diet and insulin intake, every day presents a new challenge. However, Sophia has taken charge of her health, educating her classmates and advocating for diabetes awareness.",
+    dreams: "Sophia aims to compete in the national gymnastics championships. She also wants to start a support group for young athletes living with chronic illnesses, showing them that their conditions don't have to define their limits or end their dreams."
+  },
+  {
+    id: 4,
+    name: "David Miller, 14",
+    diagnosis: "Diagnosed with Osteosarcoma",
+    raised: "$30,000.00",
+    goal: "$30,000.00",
+    percent: "100%",
+    progress: 100,
+    image: "https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=800&q=80",
+    story: "David is a passionate musician who plays both the guitar and the piano. His music has been a source of comfort not only to him but to everyone on his hospital ward. His positive attitude and sense of humor are infectious, bringing light to the darkest days.",
+    journey: "David's diagnosis of Osteosarcoma in his right leg meant he had to undergo a life-altering surgery. The physical therapy has been grueling, and learning to navigate the world with a prosthetic has tested his limits. Yet, through it all, he has never stopped playing his music, finding new ways to adapt and express himself.",
+    dreams: "David dreams of producing his own album and performing at a major music festival. He also wants to establish a music therapy program for pediatric patients, believing strongly in the healing power of music."
+  },
+  {
+    id: 5,
+    name: "Emily Davis, 8",
+    diagnosis: "Diagnosed with Cystic Fibrosis",
+    raised: "$15,890.00",
+    goal: "$30,500.00",
+    percent: "52%",
+    progress: 52,
+    image: "https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=800&q=80",
+    story: "Emily is a vibrant and imaginative girl who loves writing stories and creating her own fairy tales. Despite the daily breathing treatments and medications, her imagination knows no bounds. She often writes stories where she is a superhero fighting off 'the lung monsters'.",
+    journey: "Living with Cystic Fibrosis means Emily's daily routine is rigorous and demanding. Frequent hospital stays for lung infections have disrupted her schooling and playtime. However, her resilience is astounding. She has become an expert at her own care and faces each treatment with bravery beyond her years.",
+    dreams: "Emily wants to be a published author. She dreams of writing a series of children's books featuring heroes with invisible illnesses, helping other kids feel seen and understood. She also hopes to one day breathe easily without the help of machines."
+  },
+  {
+    id: 6,
+    name: "Leo Thompson, 6",
+    diagnosis: "Diagnosed with Neuroblastoma",
+    raised: "$9,200.00",
+    goal: "$29,600.00",
+    percent: "31%",
+    progress: 31,
+    image: "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=800&q=80",
+    story: "Leo is a sweet and affectionate boy with a deep love for animals, especially dinosaurs. His room is filled with dinosaur figures, and he can name more species than most adults. His gentle nature makes him a favorite among the nursing staff.",
+    journey: "Leo's battle with Neuroblastoma has been intense, involving surgery, chemotherapy, and stem cell rescue. The treatments have been harsh on his small body, but his spirit remains unbroken. His parents describe him as their little warrior, fighting a battle no child should have to face.",
+    dreams: "Leo dreams of becoming a paleontologist and discovering a real dinosaur bone. He also wants to visit a sanctuary for rescued animals and adopt a puppy as soon as his immune system is strong enough."
+  },
+  {
+    id: 7,
+    name: "Zoe Williams, 9",
+    diagnosis: "Diagnosed with Rare Autoimmune Disorder",
+    raised: "$28,750.00",
+    goal: "$28,750.00",
+    percent: "100%",
+    progress: 100,
+    image: "https://images.unsplash.com/photo-1596464406182-353d2661866e?auto=format&fit=crop&w=800&q=80",
+    story: "Zoe is a fiercely independent and intelligent girl who loves coding and robotics. She views her illness as a complex puzzle that doctors are trying to solve. Her analytical approach helps her cope with the unpredictability of her condition.",
+    journey: "Zoe's rare autoimmune disorder means her body's defense system mistakenly attacks her own healthy cells. Finding the right treatment has been a process of trial and error, leading to many frustrating setbacks. Despite this, Zoe continues to participate in her robotics club remotely, refusing to let her illness isolate her entirely.",
+    dreams: "Zoe dreams of designing medical robots that can perform surgeries without leaving scars. She wants to use her coding skills to create apps that help kids track their symptoms and connect with others who share similar rare conditions."
+  }
+];

@@ -1,149 +1,149 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { ArrowUpRight, ArrowRight } from "lucide-react";
+import { ArrowRight, ArrowLeft, ArrowUpRight } from "lucide-react";
+import { Link } from "react-router-dom";
+import { updates } from "../data/updates";
 
-const updates = [
-  {
-    id: "01",
-    date: "June 12, 2025",
-    category: "Medical Care",
-    title: "Adam Williams Celebrates Successful Remission",
-    image: "https://picsum.photos/seed/medical/1600/1200",
-  },
-  {
-    id: "02",
-    date: "June 5, 2025",
-    category: "Community",
-    title: "Our Team Expands to 50 Members Already",
-    image: "https://picsum.photos/seed/teamwork/1600/1200",
-  },
-  {
-    id: "03",
-    date: "June 2, 2025",
-    category: "Mental Health",
-    title: "Another Successful Therapeutic Session",
-    image: "https://picsum.photos/seed/therapy/1600/1200",
-  },
-  {
-    id: "04",
-    date: "May 29, 2025",
-    category: "Volunteers",
-    title: "A Volunteer Who Inspires All Our Crew",
-    image: "https://picsum.photos/seed/volunteer/1600/1200",
-  },
-  {
-    id: "05",
-    date: "May 15, 2025",
-    category: "Infrastructure",
-    title: "New Community Center Breaks Ground in Kampala",
-    image: "https://picsum.photos/seed/building/1600/1200",
-  }
+const positionStyles = [
+  { aspect: "aspect-[3/4]", width: "flex-1 min-w-0", opacity: "opacity-100" },
+  { aspect: "aspect-square", width: "flex-1 min-w-0", opacity: "opacity-100" },
+  { aspect: "aspect-square", width: "flex-1 min-w-0", opacity: "opacity-100" },
+  { aspect: "aspect-[16/9]", width: "flex-[1.5] min-w-0", opacity: "opacity-100" },
 ];
 
-export function Updates() {
-  const [activeIndex, setActiveIndex] = useState(0);
+export function Updates({ showAll = false }: { showAll?: boolean }) {
+  if (showAll) {
+    return (
+      <section className="py-20 md:py-32 bg-[#F4EFE6] text-[#1A1A1A]">
+        <div className="container mx-auto px-6 md:px-12 max-w-[1400px]">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight mb-16 text-center text-gray-900">
+            All Stories
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {updates.map((update) => (
+              <Link to={`/update/${update.id}`} key={update.id} className="flex flex-col group cursor-pointer">
+                <div className="w-full aspect-[16/9] mb-5 overflow-hidden relative rounded-[40px]">
+                  <img 
+                    src={update.image} 
+                    alt={update.title}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    referrerPolicy="no-referrer"
+                  />
+                </div>
+                <span className="text-sm text-gray-400 mb-2 font-medium">{update.date}</span>
+                <h3 className="text-lg md:text-xl font-bold leading-snug text-gray-800 group-hover:text-[#10B981] transition-colors">
+                  {update.title}
+                </h3>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  const [startIndex, setStartIndex] = useState(0);
+
+  const next = () => {
+    setStartIndex((prev) => (prev + 1) % updates.length);
+  };
+
+  const prev = () => {
+    setStartIndex((prev) => (prev - 1 + updates.length) % updates.length);
+  };
+
+  // Get 4 visible items, wrapping around if necessary
+  const visibleItems = [];
+  for (let i = 0; i < 4; i++) {
+    const index = (startIndex + i) % updates.length;
+    visibleItems.push({ ...updates[index], posIndex: i });
+  }
 
   return (
-    <section className="py-24 md:py-32 bg-[#0A0A0A] text-white overflow-hidden">
-      <div className="container mx-auto px-4 md:px-6 max-w-[1400px]">
+    <section className="py-24 md:py-32 bg-[#F3EFE7] text-[#111111] overflow-hidden">
+      <div className="container mx-auto px-4 sm:px-6 max-w-6xl">
         
         {/* Header */}
-        <div className="flex flex-col md:flex-row md:justify-between md:items-end mb-16 md:mb-24 gap-8">
-          <motion.div 
+        <div className="flex flex-col items-center text-center mb-16">
+          <motion.h2 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="max-w-2xl"
+            className="text-4xl sm:text-5xl font-black tracking-tighter mb-8 leading-[1.1]"
           >
-            <span className="text-[#22C55E] font-bold tracking-widest uppercase text-sm mb-6 block">
-              Latest News
-            </span>
-            <h2 className="text-4xl md:text-5xl lg:text-7xl font-bold tracking-tight leading-[1.1]">
-              Updates From Well of Life Ministries
-            </h2>
-          </motion.div>
-
-          <motion.button
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-            className="group flex items-center space-x-3 border border-white/20 rounded-full px-8 py-4 hover:bg-white hover:text-black transition-all duration-300 w-max"
+            Updates From Hope Rise
+          </motion.h2>
+          
+          <Link
+            to="/news-events"
+            className="flex items-center space-x-3 group"
           >
-            <span className="text-sm font-bold uppercase tracking-wider">See All Updates</span>
-            <ArrowUpRight className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-          </motion.button>
+            <span className="text-xs font-bold tracking-widest uppercase text-[#111111]">See All</span>
+            <div className="w-10 h-10 rounded-full border border-gray-300 flex items-center justify-center group-hover:border-[#111111] transition-colors">
+              <ArrowUpRight className="w-4 h-4 text-[#111111]" />
+            </div>
+          </Link>
         </div>
 
-        {/* Interactive Editorial Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-center">
-          
-          {/* Left: Interactive List */}
-          <div className="lg:col-span-5 flex flex-col border-t border-white/10">
-            {updates.map((update, idx) => {
-              const isActive = activeIndex === idx;
-              return (
-                <div
-                  key={update.id}
-                  onMouseEnter={() => setActiveIndex(idx)}
-                  onClick={() => setActiveIndex(idx)}
-                  className={`group relative py-8 border-b border-white/10 cursor-pointer transition-all duration-500 ${
-                    isActive ? 'pl-8' : 'hover:pl-4'
-                  }`}
-                >
-                  {/* Active Indicator Line */}
-                  <div 
-                    className={`absolute left-0 top-0 bottom-0 w-1 bg-[#22C55E] transition-all duration-500 origin-top ${
-                      isActive ? 'opacity-100 scale-y-100' : 'opacity-0 scale-y-0'
-                    }`}
-                  />
-
-                  <div className="flex items-center justify-between">
-                    <div className={`transition-opacity duration-500 ${isActive ? 'opacity-100' : 'opacity-40 group-hover:opacity-70'}`}>
-                      <div className="flex items-center space-x-4 mb-3">
-                        <span className="text-xs font-mono tracking-widest text-[#22C55E]">{update.id}</span>
-                        <span className="text-xs font-bold uppercase tracking-wider">{update.category}</span>
-                        <span className="text-xs text-white/50 hidden sm:inline-block">{update.date}</span>
-                      </div>
-                      <h3 className="text-2xl md:text-3xl font-bold leading-snug max-w-md">
-                        {update.title}
-                      </h3>
+        {/* Carousel */}
+        <div className="relative w-full overflow-hidden pb-8">
+          <AnimatePresence mode="wait">
+            <motion.div 
+              key={startIndex}
+              initial={{ opacity: 0, filter: "blur(4px)", y: 10 }}
+              animate={{ opacity: 1, filter: "blur(0px)", y: 0 }}
+              exit={{ opacity: 0, filter: "blur(4px)", y: -10 }}
+              transition={{ duration: 0.4, ease: "easeInOut" }}
+              className="flex gap-4 md:gap-6 items-start w-full"
+            >
+              {visibleItems.map((update, idx) => {
+                const style = positionStyles[idx];
+                return (
+                  <Link 
+                    to={`/update/${update.id}`}
+                    key={`${update.id}-${update.posIndex}`}
+                    className={`${style.width} ${style.opacity} flex flex-col group cursor-pointer transition-all duration-500`}
+                  >
+                    {/* Image Container */}
+                    <div className={`w-full ${style.aspect} mb-6 overflow-hidden relative rounded-[2.5rem] transition-all duration-300`}>
+                      <img 
+                        src={update.image} 
+                        alt={update.title}
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                        referrerPolicy="no-referrer"
+                      />
                     </div>
                     
-                    <div className={`shrink-0 w-12 h-12 rounded-full flex items-center justify-center transition-all duration-500 ml-4 ${
-                      isActive ? 'bg-[#22C55E] text-white rotate-0' : 'bg-white/5 text-white/40 -rotate-45 group-hover:bg-white/10'
-                    }`}>
-                      <ArrowRight className="w-5 h-5" />
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-
-          {/* Right: Massive Featured Image */}
-          <div className="lg:col-span-7 relative h-[400px] md:h-[600px] lg:h-[750px] rounded-[40px] overflow-hidden order-first lg:order-last mb-8 lg:mb-0">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={activeIndex}
-                initial={{ opacity: 0, scale: 1.05 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.95 }}
-                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                className="absolute inset-0 w-full h-full"
-              >
-                <div className="absolute inset-0 bg-black/10 z-10" /> {/* Subtle overlay for contrast */}
-                <img 
-                  src={updates[activeIndex].image} 
-                  alt={updates[activeIndex].title}
-                  className="w-full h-full object-cover"
-                  referrerPolicy="no-referrer"
-                />
-              </motion.div>
-            </AnimatePresence>
-          </div>
-
+                    {/* Text Content */}
+                    <span className="text-xs font-bold text-gray-500 mb-2 uppercase tracking-widest">{update.date}</span>
+                    <h3 className="text-lg font-bold leading-snug text-[#111111] group-hover:text-[#10B981] transition-colors">
+                      {update.title}
+                    </h3>
+                  </Link>
+                );
+              })}
+            </motion.div>
+          </AnimatePresence>
         </div>
+
+        {/* Navigation Buttons */}
+        <div className="flex justify-end items-center space-x-4 mt-8">
+          <button 
+            onClick={prev}
+            className="w-12 h-12 rounded-full border border-gray-300 flex items-center justify-center text-[#111111] hover:border-[#111111] transition-colors focus:outline-none"
+            aria-label="Previous updates"
+          >
+            <ArrowLeft className="w-5 h-5" />
+          </button>
+          <button 
+            onClick={next}
+            className="w-12 h-12 rounded-full bg-[#10B981] text-white flex items-center justify-center hover:bg-[#0EA5E9] transition-colors shadow-lg focus:outline-none"
+            aria-label="Next updates"
+          >
+            <ArrowRight className="w-5 h-5" />
+          </button>
+        </div>
+
       </div>
     </section>
   );

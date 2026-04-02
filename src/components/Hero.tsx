@@ -1,87 +1,122 @@
 import { motion } from "motion/react";
-import { ArrowRight } from "lucide-react";
+import { ArrowUpRight, ArrowDown } from "lucide-react";
 
 export function Hero() {
+  const handleScrollClick = (e: React.MouseEvent, id: string) => {
+    e.preventDefault();
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
-    <section className="relative w-full h-screen min-h-[800px] flex items-center justify-center overflow-hidden bg-brand-dark">
-      {/* Background Image */}
-      <div className="absolute inset-0 z-0">
-        <img 
-          src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&q=80&w=2000&h=1500" 
-          alt="Charity and Hope" 
-          className="w-full h-full object-cover opacity-40"
-          referrerPolicy="no-referrer"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#1a3328]/80 via-brand-dark/60 to-brand-dark"></div>
-      </div>
-
-      {/* Content */}
-      <div className="relative z-10 container mx-auto px-6 md:px-12 flex flex-col items-center text-center mt-20">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-          className="mb-6"
-        >
-          <span className="text-brand-mint font-sans text-xs md:text-sm font-bold tracking-[0.3em] uppercase">
-            Well of Life Ministries
-          </span>
-        </motion.div>
-
-        <motion.h1
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.2, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-          className="text-6xl md:text-8xl lg:text-9xl font-serif text-white mb-8 leading-[0.9] tracking-tight"
-        >
-          Providing Hope.<br />
-          <span className="italic text-brand-bg/90">Changing Lives.</span>
-        </motion.h1>
-
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
-          className="text-lg md:text-xl text-white/80 font-sans max-w-2xl mb-12 font-light"
-        >
-          Join us in our mission to bring essential resources, support, and care to communities in need. Your contribution makes a world of difference.
-        </motion.p>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          className="flex flex-col sm:flex-row items-center gap-6"
-        >
-          <button className="group flex items-center justify-center space-x-3 bg-brand-green hover:bg-brand-mint text-white px-10 py-5 rounded-full font-sans font-semibold tracking-wide transition-all duration-300">
-            <span>Donate Now</span>
-            <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center group-hover:translate-x-1 transition-transform">
-              <ArrowRight className="w-4 h-4" />
-            </div>
-          </button>
-          
-          <button className="text-white hover:text-brand-mint font-sans text-sm tracking-[0.2em] uppercase font-semibold transition-colors underline underline-offset-8 decoration-white/30 hover:decoration-brand-mint">
-            Get Help
-          </button>
-        </motion.div>
-      </div>
-
-      {/* Scroll Indicator */}
-      <motion.div 
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1, delay: 1.2 }}
-        className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 z-10"
-      >
-        <span className="text-white/50 text-[10px] font-sans tracking-[0.3em] uppercase">Scroll</span>
-        <div className="w-[1px] h-12 bg-white/20 relative overflow-hidden">
+    <section className="relative w-full min-h-screen pt-32 pb-8 flex flex-col justify-between overflow-hidden bg-[#F4EFE6] text-[#1A1A1A]">
+      
+      {/* Main Content */}
+      <div className="w-full px-6 md:px-12 flex-1 flex flex-col justify-center mt-10 md:mt-20">
+        
+        {/* Massive Heading */}
+        <div className="w-full max-w-[1400px] mx-auto flex flex-col items-center text-center">
           <motion.div 
-            animate={{ y: [0, 48] }}
-            transition={{ repeat: Infinity, duration: 1.5, ease: "linear" }}
-            className="absolute top-0 left-0 w-full h-1/2 bg-brand-mint"
-          />
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+            className="flex flex-col justify-center items-center text-[15vw] md:text-[11vw] lg:text-[140px] xl:text-[170px] leading-[0.95] font-black tracking-tighter"
+          >
+            {/* Line 1 with inline image */}
+            <div className="flex flex-row justify-center items-center gap-x-2 md:gap-x-5">
+              <span className="shrink-0">Well of</span>
+              
+              {/* Pill Image - Inline */}
+              <motion.div 
+                initial={{ width: 0, opacity: 0 }}
+                animate={{ width: "auto", opacity: 1 }}
+                transition={{ duration: 1, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+                className="h-[11vw] md:h-[8vw] lg:h-[100px] xl:h-[120px] w-[25vw] md:w-[18vw] lg:w-[220px] xl:w-[260px] rounded-[100px] overflow-hidden shrink-0"
+              >
+                <img 
+                  src="https://images.unsplash.com/photo-1529209076408-5a115ec9f1c6?auto=format&fit=crop&q=80&w=800" 
+                  alt="Support" 
+                  className="w-full h-full object-cover"
+                  referrerPolicy="no-referrer"
+                />
+              </motion.div>
+              
+              <span className="shrink-0">Life</span>
+            </div>
+            
+            {/* Line 2 */}
+            <div className="mt-2 md:mt-0">
+              <span className="shrink-0">is Support</span>
+            </div>
+          </motion.div>
+        </div>
+
+        {/* Action Buttons */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
+          className="flex items-center justify-center gap-4 mt-12 md:mt-16"
+        >
+          <a href="/#donate" onClick={(e) => handleScrollClick(e, 'donate')} className="bg-[#22C55E] hover:bg-[#16A34A] text-white px-8 py-4 rounded-full text-sm font-bold tracking-[0.1em] uppercase transition-all duration-300 hover:scale-105 shadow-lg shadow-green-500/20 inline-block">
+            Donate
+          </a>
+          
+          <a href="/#get-help" onClick={(e) => handleScrollClick(e, 'get-help')} className="flex items-center space-x-2 transition-colors group">
+            <span className="text-sm font-bold tracking-[0.1em] uppercase text-gray-900 border-b-2 border-gray-900 group-hover:border-transparent transition-all">I Need Help</span>
+            <div className="w-9 h-9 rounded-full border border-gray-300 flex items-center justify-center group-hover:border-gray-900 group-hover:bg-gray-900 group-hover:text-white transition-all">
+              <ArrowUpRight className="w-4 h-4" />
+            </div>
+          </a>
+        </motion.div>
+      </div>
+
+      {/* Bottom Banner */}
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
+        className="container mx-auto px-6 md:px-12 mt-20 overflow-hidden"
+      >
+        <div className="relative flex overflow-hidden py-8 border-t border-gray-300/50">
+          <div className="flex items-center animate-marquee w-max">
+            {/* Content duplicated to ensure seamless loop */}
+            {[1, 2].map((i) => (
+              <div key={i} className="flex items-center gap-8 md:gap-16 shrink-0 pr-8 md:pr-16">
+                <div className="flex items-center space-x-3 text-[10px] font-bold tracking-[0.2em] uppercase text-gray-500">
+                  <div className="w-4 h-4 grid grid-cols-2 gap-[2px] opacity-60">
+                    <div className="bg-current rounded-sm"></div>
+                    <div className="bg-current rounded-sm"></div>
+                    <div className="bg-current rounded-sm"></div>
+                    <div className="bg-current rounded-sm"></div>
+                  </div>
+                  <span>Quick Donate</span>
+                </div>
+                
+                {/* Logos */}
+                <div className="flex items-center gap-8 md:gap-16 opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
+                  <span className="font-serif font-bold text-xl tracking-tight">gofundme</span>
+                  <div className="flex items-center space-x-2">
+                    <span className="text-2xl font-serif">C</span>
+                    <span className="font-sans font-bold text-[8px] leading-tight tracking-wider">CANCER<br/>RESEARCH<br/>UK</span>
+                  </div>
+                  <span className="font-sans font-medium text-xl tracking-tight">Medtronic</span>
+                </div>
+
+                <button onClick={(e) => handleScrollClick(e, 'what-we-do')} className="flex items-center space-x-3 text-[10px] font-bold tracking-[0.2em] uppercase text-gray-500 hover:text-black transition-colors group">
+                  <span>Scroll Down</span>
+                  <div className="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center group-hover:border-gray-900 transition-colors">
+                    <ArrowDown className="w-3 h-3" />
+                  </div>
+                </button>
+              </div>
+            ))}
+          </div>
         </div>
       </motion.div>
+
     </section>
   );
 }

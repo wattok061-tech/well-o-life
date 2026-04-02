@@ -1,31 +1,119 @@
-import { motion } from "motion/react";
-import { ArrowUpRight, DollarSign, HeartHandshake, User } from "lucide-react";
-import { useState, useRef } from "react";
+import { ArrowUpRight } from "lucide-react";
+import { motion, useMotionValue } from "motion/react";
+import { useNavigate, useLocation } from "react-router-dom";
+import { useState, useRef, useEffect } from "react";
 
-export function WhatWeDo() {
+const services = [
+  {
+    id: 1,
+    title: "Make a Donation",
+    description: "Contribute today to help fund treatments, research, and essential support services for those battling cancer.",
+    targetId: "donate",
+    icon: (
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 2V22M17 5H9.5C8.57174 5 7.6815 5.36875 7.02513 6.02513C6.36875 6.6815 6 7.57174 6 8.5C6 9.42826 6.36875 10.3185 7.02513 10.9749C7.6815 11.6313 8.57174 12 9.5 12H14.5C15.4283 12 16.3185 12.3687 16.9749 13.0251C17.6313 13.6815 18 14.5717 18 15.5C18 16.4283 17.3185 17.3185 16.9749 17.9749C16.3185 18.6313 15.4283 19 14.5 19H6" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+      </svg>
+    ),
+    footer: (
+      <div className="flex items-center gap-3">
+        <div className="flex items-center gap-1.5">
+          {/* Apple Pay mock */}
+          <div className="w-6 h-6 bg-black rounded-full flex items-center justify-center">
+            <svg viewBox="0 0 384 512" className="w-3 h-3 text-white" fill="currentColor"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
+          </div>
+          {/* Google Pay mock */}
+          <div className="w-6 h-6 bg-white border border-gray-200 rounded-full flex items-center justify-center">
+            <svg viewBox="0 0 488 512" className="w-3 h-3" fill="#4285F4"><path d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z"/></svg>
+          </div>
+          {/* PayPal mock */}
+          <div className="w-6 h-6 bg-[#00457C] rounded-full flex items-center justify-center">
+            <svg viewBox="0 0 384 512" className="w-3 h-3 text-white" fill="currentColor"><path d="M111.4 295.9l-35.4 0c-5.8 0-10.9-4.3-11.8-10.1L2.7 18.2C1.6 10.4 7.6 3.2 15.5 3.2l139.1 0c43.3 0 76.5 10.3 93.3 43.4 11.2 22.1 12.7 48.7 4.2 74.3-15.2 45.7-53.8 68.2-101.5 68.2l-21.7 0c-7.6 0-14.1 5.5-15.3 13.1l-2.2 13.8z"/></svg>
+          </div>
+        </div>
+        <span className="text-[11px] font-bold text-gray-900 uppercase tracking-wider">Payment Options</span>
+      </div>
+    )
+  },
+  {
+    id: 2,
+    title: "Get Support",
+    description: "Access vital resources, financial aid, and counseling for cancer patients and their families in their time of need.",
+    targetId: "get-help",
+    icon: (
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+      </svg>
+    ),
+    footer: (
+      <div className="flex items-center gap-3">
+        <span className="text-xs font-bold text-gray-500 tracking-wide"># Financial Aid</span>
+        <span className="text-xs font-bold text-gray-500 tracking-wide"># Therapy</span>
+      </div>
+    )
+  },
+  {
+    id: 3,
+    title: "Become a Volunteer",
+    description: "Join our team of volunteers to support cancer patients, assist with community outreach, and make a positive impact.",
+    targetId: "volunteer",
+    icon: (
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+        <circle cx="9" cy="7" r="4" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M19 8v6M22 11h-6" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+      </svg>
+    ),
+    footer: (
+      <div className="flex items-center">
+        <div className="flex -space-x-2 mr-3">
+          <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=64&h=64&q=80" alt="Volunteer" className="w-7 h-7 rounded-full border-2 border-white object-cover" />
+          <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=64&h=64&q=80" alt="Volunteer" className="w-7 h-7 rounded-full border-2 border-white object-cover" />
+          <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=64&h=64&q=80" alt="Volunteer" className="w-7 h-7 rounded-full border-2 border-white object-cover" />
+        </div>
+        <span className="text-[11px] font-bold text-gray-900 uppercase tracking-wider">Join Our Team</span>
+      </div>
+    )
+  }
+];
+
+export function WhatWeDo({ showLearnMore = true }: { showLearnMore?: boolean }) {
+  const navigate = useNavigate();
+  const location = useLocation();
   const [activeIndex, setActiveIndex] = useState(0);
   const scrollRef = useRef<HTMLDivElement>(null);
 
-  const handleScroll = () => {
-    if (!scrollRef.current) return;
-    const scrollPosition = scrollRef.current.scrollLeft;
-    const cardWidth = scrollRef.current.children[0].clientWidth;
-    // Add half card width to trigger index change halfway through swipe
-    const newIndex = Math.round(scrollPosition / cardWidth);
-    setActiveIndex(newIndex);
+  useEffect(() => {
+    if (scrollRef.current) {
+      const cardWidth = scrollRef.current.offsetWidth * 0.85 + 16;
+      scrollRef.current.scrollTo({
+        left: activeIndex * cardWidth,
+        behavior: 'smooth'
+      });
+    }
+  }, [activeIndex]);
+
+  const handleScrollClick = (id: string) => {
+    if (location.pathname === '/') {
+      const element = document.getElementById(id);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    } else {
+      navigate(`/#${id}`);
+    }
   };
 
   return (
-    <section className="py-16 md:py-32 bg-white text-[#1A1A1A] overflow-hidden">
-      <div className="container mx-auto px-6 md:px-12 max-w-7xl">
+    <section className="py-24 md:py-32 bg-white text-[#1A1A1A]">
+      <div className="container mx-auto px-6 max-w-[1300px]">
         
         {/* Header Section */}
-        <div className="flex flex-col items-center text-center mb-10 md:mb-16">
+        <div className="flex flex-col items-center text-center mb-20">
           <motion.div 
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="bg-[#F2FCEE] text-[#4CAF50] px-3 py-1 rounded-full text-[11px] font-bold tracking-wider mb-5 uppercase"
+            className="bg-[#E8F5E9] text-[#2E7D32] px-4 py-1.5 rounded-full text-xs font-bold tracking-widest uppercase mb-8"
           >
             What We Do
           </motion.div>
@@ -35,130 +123,91 @@ export function WhatWeDo() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-[32px] md:text-5xl lg:text-[56px] font-extrabold tracking-tight max-w-[300px] md:max-w-3xl mb-6 leading-[1.1]"
+            className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-gray-900 max-w-3xl leading-[1.1] mb-10"
           >
             Providing Hope And Help During Challenging Times
           </motion.h2>
 
-          <motion.button
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-            className="flex items-center space-x-2 text-[12px] font-bold uppercase tracking-[0.1em] hover:text-[#4CAF50] transition-colors group"
-          >
-            <span>Learn More</span>
-            <div className="w-8 h-8 rounded-full border border-gray-200 flex items-center justify-center group-hover:border-[#4CAF50] transition-colors">
-              <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-            </div>
-          </motion.button>
+          {showLearnMore && (
+            <motion.button
+              onClick={() => navigate('/what-we-do')}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              className="flex items-center space-x-3 group"
+            >
+              <span className="text-xs font-bold tracking-widest uppercase text-gray-900">Learn More</span>
+              <div className="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center group-hover:border-gray-900 transition-colors">
+                <ArrowUpRight className="w-4 h-4 text-gray-900 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+              </div>
+            </motion.button>
+          )}
         </div>
 
-        {/* Cards Grid / Swipeable Mobile List */}
-        <div 
-          ref={scrollRef}
-          onScroll={handleScroll}
-          className="flex md:grid md:grid-cols-3 gap-4 md:gap-6 overflow-x-auto md:overflow-visible snap-x snap-mandatory pb-6 md:pb-0 -mx-6 px-6 md:mx-0 md:px-0 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
-        >
-          
-          {/* Card 1 */}
-          <motion.div 
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.3 }}
-            className="group bg-white border border-gray-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] rounded-[32px] p-6 md:p-8 flex flex-col h-full transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-xl cursor-pointer w-[85vw] max-w-[320px] md:w-auto md:max-w-none snap-center shrink-0"
-          >
-            <div className="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
-              <DollarSign className="w-4 h-4 text-gray-900" strokeWidth={2} />
-            </div>
-            <h3 className="text-[20px] md:text-[24px] font-bold mb-3 text-gray-900 leading-tight">Make a Donation</h3>
-            <p className="text-[14px] md:text-[15px] text-gray-600 mb-8 flex-grow leading-[1.5]">
-              Contribute today to help fund treatments, research, and essential support services for those battling cancer.
-            </p>
-            <div className="flex items-center justify-between mt-auto">
-              <div className="flex items-center space-x-3">
-                <div className="flex items-center space-x-2">
-                  <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg" alt="Apple Pay" className="h-3.5 w-auto opacity-80 mix-blend-multiply" />
-                  <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" alt="Google Pay" className="h-3.5 w-auto opacity-80 mix-blend-multiply" />
-                  <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal" className="h-3.5 w-auto opacity-80 mix-blend-multiply" />
+        {/* Cards Section */}
+        <div className="relative overflow-hidden">
+          {/* Desktop Grid */}
+          <div className="hidden md:grid grid-cols-3 gap-6">
+            {services.map((service, index) => (
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 + 0.3 }}
+                key={service.id}
+                onClick={() => handleScrollClick(service.targetId)}
+                className="bg-white rounded-[40px] p-10 border border-gray-200 flex flex-col h-full hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 group cursor-pointer"
+              >
+                <div className="w-10 h-10 rounded-full flex items-center justify-center mb-12 bg-black text-white shadow-md">
+                  {service.icon}
                 </div>
-                <span className="text-[11px] md:text-[12px] font-semibold text-gray-600">Payment Options</span>
-              </div>
-              <button className="w-10 h-10 rounded-full border border-gray-200 bg-white flex items-center justify-center group-hover:border-gray-300 group-hover:bg-gray-50 transition-colors shrink-0 ml-2">
-                <ArrowUpRight className="w-4 h-4 text-gray-900 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300" />
-              </button>
-            </div>
-          </motion.div>
-
-          {/* Card 2 */}
-          <motion.div 
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.4 }}
-            className="group bg-white border border-gray-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] rounded-[32px] p-6 md:p-8 flex flex-col h-full transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-xl cursor-pointer w-[85vw] max-w-[320px] md:w-auto md:max-w-none snap-center shrink-0"
-          >
-            <div className="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
-              <HeartHandshake className="w-4 h-4 text-gray-900" strokeWidth={2} />
-            </div>
-            <h3 className="text-[20px] md:text-[24px] font-bold mb-3 text-gray-900 leading-tight">Get Support</h3>
-            <p className="text-[14px] md:text-[15px] text-gray-600 mb-8 flex-grow leading-[1.5]">
-              Access vital resources, financial aid, and counseling for cancer patients and their families in their time of need.
-            </p>
-            <div className="flex items-center justify-between mt-auto">
-              <div className="flex items-center space-x-2 text-[11px] md:text-[12px] font-semibold text-gray-600">
-                <span># Financial Aid</span>
-                <span># Therapy</span>
-              </div>
-              <button className="w-10 h-10 rounded-full border border-gray-200 bg-white flex items-center justify-center group-hover:border-gray-300 group-hover:bg-gray-50 transition-colors shrink-0 ml-2">
-                <ArrowUpRight className="w-4 h-4 text-gray-900 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300" />
-              </button>
-            </div>
-          </motion.div>
-
-          {/* Card 3 */}
-          <motion.div 
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.5 }}
-            className="group bg-white border border-gray-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] rounded-[32px] p-6 md:p-8 flex flex-col h-full transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-xl cursor-pointer w-[85vw] max-w-[320px] md:w-auto md:max-w-none snap-center shrink-0"
-          >
-            <div className="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
-              <User className="w-4 h-4 text-gray-900" strokeWidth={2} />
-            </div>
-            <h3 className="text-[20px] md:text-[24px] font-bold mb-3 text-gray-900 leading-tight">Become a Volunteer</h3>
-            <p className="text-[14px] md:text-[15px] text-gray-600 mb-8 flex-grow leading-[1.5]">
-              Join our team of volunteers to support cancer patients, assist with community outreach, and make a positive impact.
-            </p>
-            <div className="flex items-center justify-between mt-auto">
-              <div className="flex items-center space-x-3">
-                <div className="flex -space-x-2">
-                  <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&h=100&q=80" alt="Volunteer" className="w-6 h-6 rounded-full border-2 border-white object-cover relative z-30 shadow-sm" />
-                  <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=100&h=100&q=80" alt="Volunteer" className="w-6 h-6 rounded-full border-2 border-white object-cover relative z-20 shadow-sm" />
-                  <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&h=100&q=80" alt="Volunteer" className="w-6 h-6 rounded-full border-2 border-white object-cover relative z-10 shadow-sm" />
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">{service.title}</h3>
+                <p className="text-gray-600 leading-relaxed mb-12 flex-grow">{service.description}</p>
+                <div className="flex items-center justify-between mt-auto pt-4">
+                  {service.footer}
+                  <div className="w-10 h-10 shrink-0 rounded-full border border-gray-200 flex items-center justify-center group-hover:bg-gray-900 group-hover:border-gray-900 group-hover:text-white transition-colors text-gray-400">
+                    <ArrowUpRight className="w-4 h-4" />
+                  </div>
                 </div>
-                <span className="text-[11px] md:text-[12px] font-semibold text-gray-600">Join Our Team</span>
-              </div>
-              <button className="w-10 h-10 rounded-full border border-gray-200 bg-white flex items-center justify-center group-hover:border-gray-300 group-hover:bg-gray-50 transition-colors shrink-0 ml-2">
-                <ArrowUpRight className="w-4 h-4 text-gray-900 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300" />
-              </button>
+              </motion.div>
+            ))}
+          </div>
+
+            {/* Mobile Swipeable Cards */}
+          <div className="md:hidden relative">
+            <div ref={scrollRef} className="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-8 -mx-6 px-6 scrollbar-hide">
+              {services.map((service, index) => (
+                <div
+                  key={service.id}
+                  className={`snap-center shrink-0 w-[85vw] bg-white rounded-[32px] p-8 border border-gray-100 flex flex-col h-full shadow-sm transition-all ${index === activeIndex ? 'scale-100 opacity-100' : 'scale-95 opacity-70'}`}
+                >
+                  <div className="w-12 h-12 rounded-full flex items-center justify-center mb-8 bg-gray-50 text-gray-900">
+                    {service.icon}
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-3">{service.title}</h3>
+                  <p className="text-gray-600 leading-relaxed text-sm mb-8 flex-grow">{service.description}</p>
+                  <div className="flex items-center justify-between mt-auto pt-4 border-t border-gray-100">
+                    <div className="scale-90 origin-left">{service.footer}</div>
+                    <div className="w-10 h-10 shrink-0 rounded-full border border-gray-100 flex items-center justify-center text-gray-900 bg-gray-50">
+                      <ArrowUpRight className="w-4 h-4" />
+                    </div>
+                  </div>
+                </div>
+              ))}
             </div>
-          </motion.div>
-
-        </div>
-
-        {/* Pagination Dots (Mobile Only) */}
-        <div className="flex justify-center space-x-2 mt-6 md:hidden">
-          {[0, 1, 2].map((index) => (
-            <div 
-              key={index}
-              className={`w-1.5 h-1.5 rounded-full transition-colors duration-300 ${
-                activeIndex === index ? 'bg-[#22C55E]' : 'bg-gray-200'
-              }`}
-            />
-          ))}
+            
+            {/* Pagination Dots */}
+            <div className="flex justify-center gap-2 mt-2">
+              {services.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setActiveIndex(index)}
+                  className={`w-2 h-2 rounded-full transition-all ${index === activeIndex ? 'bg-black w-6' : 'bg-gray-300'}`}
+                />
+              ))}
+            </div>
+          </div>
         </div>
 
       </div>
