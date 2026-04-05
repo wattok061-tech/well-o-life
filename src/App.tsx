@@ -19,7 +19,6 @@ import { PatientDetailPage } from "./components/PatientDetailPage";
 import { UpdateDetailPage } from "./components/UpdateDetailPage";
 import { SideRail } from "./components/SideRail";
 import { ScrollToTop } from "./components/ScrollToTop";
-import { FloatingDonateButton } from "./components/FloatingDonateButton";
 import { WhoWeAre } from "./pages/WhoWeAre";
 import { WhatWeDoPage } from "./pages/WhatWeDoPage";
 import { NewsEvents } from "./pages/NewsEvents";
@@ -50,7 +49,6 @@ export default function App() {
   return (
     <Router>
       <ScrollToTop />
-      <FloatingDonateButton />
       <Navbar setIsOpen={setIsMenuOpen} />
       <SideRail isOpen={isMenuOpen} setIsOpen={setIsMenuOpen} />
       <div className="min-h-screen bg-brand-bg font-sans text-brand-dark selection:bg-brand-green selection:text-white">

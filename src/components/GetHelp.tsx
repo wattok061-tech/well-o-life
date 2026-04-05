@@ -25,10 +25,10 @@ export function GetHelp() {
   };
 
   return (
-    <section id="get-help" className="py-24 md:py-32 bg-white text-[#1A1A1A] relative">
+    <section id="get-help" className="py-16 md:py-32 bg-white text-[#0B2545] relative">
       <div className="container mx-auto px-6 max-w-5xl">
         
-        <div className="mb-16 md:mb-20 max-w-2xl">
+        <div className="mb-12 md:mb-20 max-w-2xl">
           <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4 text-gray-900">
             Request Assistance
           </h2>
@@ -37,11 +37,11 @@ export function GetHelp() {
           </p>
         </div>
 
-        <div className="flex flex-col md:flex-row gap-12 md:gap-20 mb-20">
+        <div className="flex flex-col md:flex-row gap-12 md:gap-20 mb-16 md:mb-20">
           
           {/* Left Column: Form */}
           <div className="md:w-2/3">
-            <form className="space-y-6" onSubmit={handleSubmit}>
+            <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
               
               {/* Category Selection */}
               <div>
@@ -64,7 +64,7 @@ export function GetHelp() {
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
                   <input 

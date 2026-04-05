@@ -5,16 +5,16 @@ import { Link } from "react-router-dom";
 import { updates } from "../data/updates";
 
 const positionStyles = [
-  { aspect: "aspect-[3/4]", width: "flex-1 min-w-0", opacity: "opacity-100" },
-  { aspect: "aspect-square", width: "flex-1 min-w-0", opacity: "opacity-100" },
-  { aspect: "aspect-square", width: "flex-1 min-w-0", opacity: "opacity-100" },
-  { aspect: "aspect-[16/9]", width: "flex-[1.5] min-w-0", opacity: "opacity-100" },
+  { aspect: "aspect-[4/3] sm:aspect-[3/4]", width: "w-full sm:flex-1 min-w-0", opacity: "opacity-100 block" },
+  { aspect: "aspect-square", width: "sm:flex-1 min-w-0", opacity: "opacity-100 hidden sm:flex" },
+  { aspect: "aspect-square", width: "md:flex-1 min-w-0", opacity: "opacity-100 hidden md:flex" },
+  { aspect: "aspect-[16/9]", width: "lg:flex-[1.5] min-w-0", opacity: "opacity-100 hidden lg:flex" },
 ];
 
 export function Updates({ showAll = false }: { showAll?: boolean }) {
   if (showAll) {
     return (
-      <section className="py-20 md:py-32 bg-[#F4EFE6] text-[#1A1A1A]">
+      <section className="py-20 md:py-32 bg-[#F4EFE6] text-[#0B2545]">
         <div className="container mx-auto px-6 md:px-12 max-w-[1400px]">
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight mb-16 text-center text-gray-900">
             All Stories
@@ -31,7 +31,7 @@ export function Updates({ showAll = false }: { showAll?: boolean }) {
                   />
                 </div>
                 <span className="text-sm text-gray-400 mb-2 font-medium">{update.date}</span>
-                <h3 className="text-lg md:text-xl font-bold leading-snug text-gray-800 group-hover:text-[#10B981] transition-colors">
+                <h3 className="text-lg md:text-xl font-bold leading-snug text-gray-800 group-hover:text-[#C69C38] transition-colors">
                   {update.title}
                 </h3>
               </Link>
@@ -60,7 +60,7 @@ export function Updates({ showAll = false }: { showAll?: boolean }) {
   }
 
   return (
-    <section className="py-24 md:py-32 bg-[#F3EFE7] text-[#111111] overflow-hidden">
+    <section className="py-24 md:py-32 bg-[#F3EFE7] text-[#0B2545] overflow-hidden">
       <div className="container mx-auto px-4 sm:px-6 max-w-6xl">
         
         {/* Header */}
@@ -71,16 +71,16 @@ export function Updates({ showAll = false }: { showAll?: boolean }) {
             viewport={{ once: true }}
             className="text-4xl sm:text-5xl font-black tracking-tighter mb-8 leading-[1.1]"
           >
-            Updates From Hope Rise
+            Updates From Well Of Life Int. Ministry
           </motion.h2>
           
           <Link
             to="/news-events"
             className="flex items-center space-x-3 group"
           >
-            <span className="text-xs font-bold tracking-widest uppercase text-[#111111]">See All</span>
-            <div className="w-10 h-10 rounded-full border border-gray-300 flex items-center justify-center group-hover:border-[#111111] transition-colors">
-              <ArrowUpRight className="w-4 h-4 text-[#111111]" />
+            <span className="text-xs font-bold tracking-widest uppercase text-[#0B2545]">See All</span>
+            <div className="w-10 h-10 rounded-full border border-gray-300 flex items-center justify-center group-hover:border-[#0B2545] transition-colors">
+              <ArrowUpRight className="w-4 h-4 text-[#0B2545]" />
             </div>
           </Link>
         </div>
@@ -116,7 +116,7 @@ export function Updates({ showAll = false }: { showAll?: boolean }) {
                     
                     {/* Text Content */}
                     <span className="text-xs font-bold text-gray-500 mb-2 uppercase tracking-widest">{update.date}</span>
-                    <h3 className="text-lg font-bold leading-snug text-[#111111] group-hover:text-[#10B981] transition-colors">
+                    <h3 className="text-lg font-bold leading-snug text-[#0B2545] group-hover:text-[#C69C38] transition-colors">
                       {update.title}
                     </h3>
                   </Link>
@@ -130,14 +130,14 @@ export function Updates({ showAll = false }: { showAll?: boolean }) {
         <div className="flex justify-end items-center space-x-4 mt-8">
           <button 
             onClick={prev}
-            className="w-12 h-12 rounded-full border border-gray-300 flex items-center justify-center text-[#111111] hover:border-[#111111] transition-colors focus:outline-none"
+            className="w-12 h-12 rounded-full border border-gray-300 flex items-center justify-center text-[#0B2545] hover:border-[#0B2545] transition-colors focus:outline-none"
             aria-label="Previous updates"
           >
             <ArrowLeft className="w-5 h-5" />
           </button>
           <button 
             onClick={next}
-            className="w-12 h-12 rounded-full bg-[#10B981] text-white flex items-center justify-center hover:bg-[#0EA5E9] transition-colors shadow-lg focus:outline-none"
+            className="w-12 h-12 rounded-full bg-[#C69C38] text-white flex items-center justify-center hover:bg-[#1E3A8A] transition-colors shadow-lg focus:outline-none"
             aria-label="Next updates"
           >
             <ArrowRight className="w-5 h-5" />

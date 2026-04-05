@@ -104,7 +104,7 @@ export function WhatWeDo({ showLearnMore = true }: { showLearnMore?: boolean }) 
   };
 
   return (
-    <section className="py-24 md:py-32 bg-white text-[#1A1A1A]">
+    <section className="py-24 md:py-32 bg-white text-[#0B2545]">
       <div className="container mx-auto px-6 max-w-[1300px]">
         
         {/* Header Section */}
@@ -123,7 +123,7 @@ export function WhatWeDo({ showLearnMore = true }: { showLearnMore?: boolean }) 
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-gray-900 max-w-3xl leading-[1.1] mb-10"
+            className="text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight text-gray-900 max-w-3xl leading-[1.1] mb-10"
           >
             Providing Hope And Help During Challenging Times
           </motion.h2>
@@ -147,8 +147,8 @@ export function WhatWeDo({ showLearnMore = true }: { showLearnMore?: boolean }) 
 
         {/* Cards Section */}
         <div className="relative overflow-hidden">
-          {/* Desktop Grid */}
-          <div className="hidden md:grid grid-cols-3 gap-6">
+          {/* Unified Grid for Mobile and Desktop */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {services.map((service, index) => (
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
@@ -157,56 +157,21 @@ export function WhatWeDo({ showLearnMore = true }: { showLearnMore?: boolean }) 
                 transition={{ delay: index * 0.1 + 0.3 }}
                 key={service.id}
                 onClick={() => handleScrollClick(service.targetId)}
-                className="bg-white rounded-[40px] p-10 border border-gray-200 flex flex-col h-full hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 group cursor-pointer"
+                className="bg-white rounded-[32px] md:rounded-[40px] p-8 md:p-10 border border-gray-200 flex flex-col h-full hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 group cursor-pointer"
               >
-                <div className="w-10 h-10 rounded-full flex items-center justify-center mb-12 bg-black text-white shadow-md">
+                <div className="w-10 h-10 rounded-full flex items-center justify-center mb-8 md:mb-12 bg-black text-white shadow-md">
                   {service.icon}
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">{service.title}</h3>
-                <p className="text-gray-600 leading-relaxed mb-12 flex-grow">{service.description}</p>
-                <div className="flex items-center justify-between mt-auto pt-4">
-                  {service.footer}
+                <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-3 md:mb-4">{service.title}</h3>
+                <p className="text-sm md:text-base text-gray-600 leading-relaxed mb-8 md:mb-12 flex-grow">{service.description}</p>
+                <div className="flex items-center justify-between mt-auto pt-4 border-t border-gray-100 md:border-none">
+                  <div className="scale-90 md:scale-100 origin-left">{service.footer}</div>
                   <div className="w-10 h-10 shrink-0 rounded-full border border-gray-200 flex items-center justify-center group-hover:bg-gray-900 group-hover:border-gray-900 group-hover:text-white transition-colors text-gray-400">
                     <ArrowUpRight className="w-4 h-4" />
                   </div>
                 </div>
               </motion.div>
             ))}
-          </div>
-
-            {/* Mobile Swipeable Cards */}
-          <div className="md:hidden relative">
-            <div ref={scrollRef} className="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-8 -mx-6 px-6 scrollbar-hide">
-              {services.map((service, index) => (
-                <div
-                  key={service.id}
-                  className={`snap-center shrink-0 w-[85vw] bg-white rounded-[32px] p-8 border border-gray-100 flex flex-col h-full shadow-sm transition-all ${index === activeIndex ? 'scale-100 opacity-100' : 'scale-95 opacity-70'}`}
-                >
-                  <div className="w-12 h-12 rounded-full flex items-center justify-center mb-8 bg-gray-50 text-gray-900">
-                    {service.icon}
-                  </div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-3">{service.title}</h3>
-                  <p className="text-gray-600 leading-relaxed text-sm mb-8 flex-grow">{service.description}</p>
-                  <div className="flex items-center justify-between mt-auto pt-4 border-t border-gray-100">
-                    <div className="scale-90 origin-left">{service.footer}</div>
-                    <div className="w-10 h-10 shrink-0 rounded-full border border-gray-100 flex items-center justify-center text-gray-900 bg-gray-50">
-                      <ArrowUpRight className="w-4 h-4" />
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-            
-            {/* Pagination Dots */}
-            <div className="flex justify-center gap-2 mt-2">
-              {services.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setActiveIndex(index)}
-                  className={`w-2 h-2 rounded-full transition-all ${index === activeIndex ? 'bg-black w-6' : 'bg-gray-300'}`}
-                />
-              ))}
-            </div>
           </div>
         </div>
 

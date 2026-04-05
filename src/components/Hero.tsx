@@ -11,7 +11,7 @@ export function Hero() {
   };
 
   return (
-    <section className="relative w-full min-h-screen pt-32 pb-8 flex flex-col justify-between overflow-hidden bg-[#F4EFE6] text-[#1A1A1A]">
+    <section className="relative w-full min-h-screen pt-32 pb-8 flex flex-col justify-between overflow-hidden bg-[#F4EFE6] text-[#0B2545]">
       
       {/* Main Content */}
       <div className="w-full px-6 md:px-12 flex-1 flex flex-col justify-center mt-10 md:mt-20">
@@ -22,18 +22,21 @@ export function Hero() {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-            className="flex flex-col justify-center items-center text-[15vw] md:text-[11vw] lg:text-[140px] xl:text-[170px] leading-[0.95] font-black tracking-tighter"
+            className="flex flex-col justify-center items-center text-[14vw] sm:text-[12vw] md:text-[11vw] lg:text-[130px] xl:text-[160px] leading-[0.95] font-black tracking-tighter w-full px-2"
           >
-            {/* Line 1 with inline image */}
-            <div className="flex flex-row justify-center items-center gap-x-2 md:gap-x-5">
-              <span className="shrink-0">Well of</span>
-              
+            {/* Line 1 */}
+            <div className="flex flex-row flex-wrap justify-center items-center gap-x-2 md:gap-x-5 w-full">
+              <span className="shrink-0">Well Of Life</span>
+            </div>
+            
+            {/* Line 2 with inline image */}
+            <div className="mt-2 md:mt-0 flex flex-row flex-wrap justify-center items-center gap-x-2 md:gap-x-5 w-full">
               {/* Pill Image - Inline */}
               <motion.div 
                 initial={{ width: 0, opacity: 0 }}
                 animate={{ width: "auto", opacity: 1 }}
                 transition={{ duration: 1, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-                className="h-[11vw] md:h-[8vw] lg:h-[100px] xl:h-[120px] w-[25vw] md:w-[18vw] lg:w-[220px] xl:w-[260px] rounded-[100px] overflow-hidden shrink-0"
+                className="h-[14vw] sm:h-[12vw] lg:h-[140px] xl:h-[160px] w-[30vw] sm:w-[26vw] lg:w-[300px] xl:w-[340px] rounded-[100px] overflow-hidden shrink-0"
               >
                 <img 
                   src="https://images.unsplash.com/photo-1529209076408-5a115ec9f1c6?auto=format&fit=crop&q=80&w=800" 
@@ -43,12 +46,7 @@ export function Hero() {
                 />
               </motion.div>
               
-              <span className="shrink-0">Life</span>
-            </div>
-            
-            {/* Line 2 */}
-            <div className="mt-2 md:mt-0">
-              <span className="shrink-0">is Support</span>
+              <span className="shrink-0">Int. Ministry</span>
             </div>
           </motion.div>
         </div>
@@ -60,13 +58,13 @@ export function Hero() {
           transition={{ duration: 0.8, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
           className="flex items-center justify-center gap-4 mt-12 md:mt-16"
         >
-          <a href="/#donate" onClick={(e) => handleScrollClick(e, 'donate')} className="bg-[#22C55E] hover:bg-[#16A34A] text-white px-8 py-4 rounded-full text-sm font-bold tracking-[0.1em] uppercase transition-all duration-300 hover:scale-105 shadow-lg shadow-green-500/20 inline-block">
+          <a href="/#donate" onClick={(e) => handleScrollClick(e, 'donate')} className="bg-gradient-to-r from-[#C69C38] to-[#D97706] text-white px-10 py-4 rounded-full text-sm font-bold tracking-[0.1em] uppercase transition-all duration-300 hover:scale-105 shadow-[0_8px_30px_rgba(198,156,56,0.4)] inline-block">
             Donate
           </a>
           
           <a href="/#get-help" onClick={(e) => handleScrollClick(e, 'get-help')} className="flex items-center space-x-2 transition-colors group">
-            <span className="text-sm font-bold tracking-[0.1em] uppercase text-gray-900 border-b-2 border-gray-900 group-hover:border-transparent transition-all">I Need Help</span>
-            <div className="w-9 h-9 rounded-full border border-gray-300 flex items-center justify-center group-hover:border-gray-900 group-hover:bg-gray-900 group-hover:text-white transition-all">
+            <span className="text-sm font-bold tracking-[0.1em] uppercase text-[#0B2545] border-b-2 border-[#0B2545] group-hover:border-transparent transition-all">I Need Help</span>
+            <div className="w-10 h-10 rounded-full border border-gray-300 flex items-center justify-center group-hover:border-[#0B2545] group-hover:bg-[#0B2545] group-hover:text-white transition-all shadow-sm">
               <ArrowUpRight className="w-4 h-4" />
             </div>
           </a>
@@ -82,8 +80,8 @@ export function Hero() {
       >
         <div className="relative flex overflow-hidden py-8 border-t border-gray-300/50">
           <div className="flex items-center animate-marquee w-max">
-            {/* Content duplicated to ensure seamless loop */}
-            {[1, 2].map((i) => (
+            {/* Content duplicated to ensure seamless loop on all screen sizes */}
+            {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
               <div key={i} className="flex items-center gap-8 md:gap-16 shrink-0 pr-8 md:pr-16">
                 <div className="flex items-center space-x-3 text-[10px] font-bold tracking-[0.2em] uppercase text-gray-500">
                   <div className="w-4 h-4 grid grid-cols-2 gap-[2px] opacity-60">

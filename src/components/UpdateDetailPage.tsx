@@ -20,11 +20,11 @@ export function UpdateDetailPage() {
 
   if (!update) {
     return (
-      <div className="min-h-screen bg-[#F4EFE6] flex flex-col items-center justify-center text-[#1A1A1A]">
+      <div className="min-h-screen bg-[#F4EFE6] flex flex-col items-center justify-center text-[#0B2545]">
         <h1 className="text-4xl font-bold mb-4">Update Not Found</h1>
         <button 
           onClick={() => navigate(-1)}
-          className="text-[#10B981] hover:underline flex items-center gap-2"
+          className="text-[#C69C38] hover:underline flex items-center gap-2"
         >
           <ArrowLeft className="w-4 h-4" /> Go Back
         </button>
@@ -33,10 +33,10 @@ export function UpdateDetailPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#F4EFE6] text-[#1A1A1A] flex flex-col">
+    <div className="min-h-screen bg-[#F4EFE6] text-[#0B2545] flex flex-col">
       <Navbar />
       
-      <main className="flex-grow pt-32 pb-20">
+      <main className="flex-grow pt-24 md:pt-32 pb-12 md:pb-20">
         <article className="container mx-auto px-6 md:px-12 max-w-4xl">
           {/* Back Button */}
           <button 
@@ -57,7 +57,7 @@ export function UpdateDetailPage() {
                 {update.date}
               </span>
               <span className="w-1 h-1 rounded-full bg-gray-300"></span>
-              <span className="uppercase tracking-widest text-xs font-bold text-[#10B981]">News & Updates</span>
+              <span className="uppercase tracking-widest text-xs font-bold text-[#C69C38]">News & Updates</span>
             </div>
             
             <motion.h1 
@@ -99,7 +99,7 @@ export function UpdateDetailPage() {
               Our community continues to grow and adapt to the challenges we face. The dedication shown by individuals like those highlighted in this update is what makes our mission possible. Every day, we see the profound impact that compassion and organized effort can have on the lives of those who need it most.
             </p>
             <p>
-              As we look to the future, we remain committed to expanding our reach and deepening our support structures. We invite you to join us in this journey, whether through volunteering, donating, or simply sharing our stories with your network. Together, we are building a well of life that sustains us all.
+              As we look to the future, we remain committed to expanding our reach and deepening our support structures. We invite you to join us in this journey, whether through volunteering, donating, or simply sharing our stories with your network. Together, we are building a Well Of Life Int. Ministry that sustains us all.
             </p>
           </motion.div>
 

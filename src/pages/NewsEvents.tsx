@@ -14,7 +14,7 @@ export function NewsEvents() {
     <>
       <Navbar />
       <PageWrapper>
-        <main className="pt-32 pb-20 bg-[#F9F8F6] min-h-screen">
+        <main className="pt-24 md:pt-32 pb-12 md:pb-20 bg-[#F9F8F6] min-h-screen">
           <div className="container mx-auto px-6 md:px-12 max-w-[1400px]">
             <div className="flex flex-col items-center mb-16">
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight mb-8 text-gray-900 text-center">
@@ -27,7 +27,7 @@ export function NewsEvents() {
                   onClick={() => setActiveTab('news')}
                   className={`px-6 py-2.5 rounded-full text-sm font-bold tracking-wide transition-all ${
                     activeTab === 'news' 
-                      ? 'bg-[#10B981] text-white shadow-md' 
+                      ? 'bg-[#C69C38] text-white shadow-md' 
                       : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
                   }`}
                 >
@@ -37,7 +37,7 @@ export function NewsEvents() {
                   onClick={() => setActiveTab('stories')}
                   className={`px-6 py-2.5 rounded-full text-sm font-bold tracking-wide transition-all ${
                     activeTab === 'stories' 
-                      ? 'bg-[#10B981] text-white shadow-md' 
+                      ? 'bg-[#C69C38] text-white shadow-md' 
                       : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
                   }`}
                 >
@@ -67,7 +67,7 @@ export function NewsEvents() {
                         />
                       </div>
                       <span className="text-sm text-gray-500 mb-2 font-medium">{update.date}</span>
-                      <h3 className="text-xl font-bold leading-snug text-gray-800 group-hover:text-[#10B981] transition-colors">
+                      <h3 className="text-xl font-bold leading-snug text-gray-800 group-hover:text-[#C69C38] transition-colors">
                         {update.title}
                       </h3>
                     </Link>
@@ -97,7 +97,7 @@ export function NewsEvents() {
                       </div>
                       <div className="p-6 flex flex-col flex-grow">
                         <h3 className="text-xl font-bold text-gray-900 mb-1">{story.name}</h3>
-                        <p className="text-sm text-[#10B981] font-semibold mb-4">{story.diagnosis}</p>
+                        <p className="text-sm text-[#C69C38] font-semibold mb-4">{story.diagnosis}</p>
                         <p className="text-gray-600 text-sm line-clamp-3 mb-6 flex-grow">
                           {story.story}
                         </p>
@@ -109,7 +109,7 @@ export function NewsEvents() {
                           </div>
                           <div className="w-full h-2 bg-gray-100 rounded-full overflow-hidden">
                             <div 
-                              className="h-full bg-[#10B981] rounded-full"
+                              className="h-full bg-[#C69C38] rounded-full"
                               style={{ width: `${story.progress}%` }}
                             />
                           </div>
@@ -119,7 +119,7 @@ export function NewsEvents() {
                           to={`/patient/${story.id}`}
                           className={`w-full py-3 rounded-xl border-2 font-bold text-center transition-colors block ${
                             story.progress >= 100
-                              ? 'border-[#10B981] bg-[#10B981]/10 text-[#10B981] hover:bg-[#10B981] hover:text-white'
+                              ? 'border-[#C69C38] bg-[#C69C38]/10 text-[#C69C38] hover:bg-[#C69C38] hover:text-white'
                               : 'border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white'
                           }`}
                         >
