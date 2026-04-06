@@ -2,7 +2,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { ArrowRight, ArrowLeft, ArrowUpRight } from "lucide-react";
 import { Link } from "react-router-dom";
-import { updates } from "../data/updates";
+import { useNews } from "../hooks/useNews";
 
 const positionStyles = [
   { aspect: "aspect-[4/3] sm:aspect-[3/4]", width: "w-full sm:flex-1 min-w-0", opacity: "opacity-100 block" },
@@ -12,6 +12,12 @@ const positionStyles = [
 ];
 
 export function Updates({ showAll = false }: { showAll?: boolean }) {
+  const { news: updates, loading, error } = useNews();
+  const [startIndex, setStartIndex] = useState(0);
+
+  if (loading) return <section className="py-24 bg-[#F3EFE7] text-center">Loading updates...</section>;
+  if (error) return <section className="py-24 bg-[#F3EFE7] text-center text-red-600">{error}</section>;
+
   if (showAll) {
     return (
       <section className="py-20 md:py-32 bg-[#F4EFE6] text-[#0B2545]">
@@ -41,8 +47,6 @@ export function Updates({ showAll = false }: { showAll?: boolean }) {
       </section>
     );
   }
-
-  const [startIndex, setStartIndex] = useState(0);
 
   const next = () => {
     setStartIndex((prev) => (prev + 1) % updates.length);

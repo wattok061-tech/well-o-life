@@ -76,18 +76,5 @@ export const stories = [
     story: "Leo is a sweet and affectionate boy with a deep love for animals, especially dinosaurs. His room is filled with dinosaur figures, and he can name more species than most adults. His gentle nature makes him a favorite among the nursing staff.",
     journey: "Leo's battle with Neuroblastoma has been intense, involving surgery, chemotherapy, and stem cell rescue. The treatments have been harsh on his small body, but his spirit remains unbroken. His parents describe him as their little warrior, fighting a battle no child should have to face.",
     dreams: "Leo dreams of becoming a paleontologist and discovering a real dinosaur bone. He also wants to visit a sanctuary for rescued animals and adopt a puppy as soon as his immune system is strong enough."
-  },
-  {
-    id: 7,
-    name: "Zoe Williams, 9",
-    diagnosis: "Diagnosed with Rare Autoimmune Disorder",
-    raised: "$28,750.00",
-    goal: "$28,750.00",
-    percent: "100%",
-    progress: 100,
-    image: "https://images.unsplash.com/photo-1596464406182-353d2661866e?auto=format&fit=crop&w=800&q=80",
-    story: "Zoe is a fiercely independent and intelligent girl who loves coding and robotics. She views her illness as a complex puzzle that doctors are trying to solve. Her analytical approach helps her cope with the unpredictability of her condition.",
-    journey: "Zoe's rare autoimmune disorder means her body's defense system mistakenly attacks her own healthy cells. Finding the right treatment has been a process of trial and error, leading to many frustrating setbacks. Despite this, Zoe continues to participate in her robotics club remotely, refusing to let her illness isolate her entirely.",
-    dreams: "Zoe dreams of designing medical robots that can perform surgeries without leaving scars. She wants to use her coding skills to create apps that help kids track their symptoms and connect with others who share similar rare conditions."
   }
 ];

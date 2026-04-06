@@ -2,12 +2,13 @@ import { useState, useRef } from "react";
 import { motion } from "motion/react";
 import { ArrowUpRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { stories } from "../data/stories";
+import { useStories } from "../hooks/useStories";
 
 export function InspiringStories() {
   const [activeIndex, setActiveIndex] = useState(0);
   const navigate = useNavigate();
   const scrollRef = useRef<HTMLDivElement>(null);
+  const { stories, loading, error } = useStories();
 
   const handleScroll = () => {
     if (scrollRef.current) {
@@ -17,6 +18,9 @@ export function InspiringStories() {
       setActiveIndex(Math.round(scrollLeft / (itemWidth * 0.8)));
     }
   };
+
+  if (loading) return <section className="py-24 bg-[#F3EFE7] text-center">Loading stories...</section>;
+  if (error) return <section className="py-24 bg-[#F3EFE7] text-center text-red-600">{error}</section>;
 
   return (
     <section className="py-24 md:py-32 bg-[#F3EFE7] text-[#0B2545] overflow-hidden">
@@ -57,7 +61,7 @@ export function InspiringStories() {
             const isActive = activeIndex === index;
             
             return (
-              <div
+              <motion.div
                 key={story.id}
                 onMouseEnter={() => setActiveIndex(index)}
                 onClick={() => {
@@ -67,10 +71,19 @@ export function InspiringStories() {
                     setActiveIndex(index);
                   }
                 }}
-                className={`shrink-0 snap-center relative rounded-[2.5rem] overflow-hidden cursor-pointer transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)]
+                animate={{
+                  flex: isActive ? 10 : 1,
+                  width: isActive ? '85vw' : '15vw',
+                }}
+                transition={{
+                  type: "spring",
+                  stiffness: 200,
+                  damping: 30,
+                }}
+                className={`shrink-0 snap-center relative rounded-[2.5rem] overflow-hidden cursor-pointer
                   ${isActive 
-                    ? 'w-[85vw] md:w-auto md:flex-[10] shadow-2xl' 
-                    : 'w-[15vw] md:w-auto md:flex-[1] md:min-w-[80px] grayscale opacity-60 hover:opacity-100 hover:grayscale-[50%]'
+                    ? 'shadow-2xl' 
+                    : 'md:min-w-[80px] grayscale opacity-60 hover:opacity-100 hover:grayscale-[50%]'
                   }
                 `}
               >
@@ -149,7 +162,7 @@ export function InspiringStories() {
                   </div>
                 </div>
 
-              </div>
+              </motion.div>
             );
           })}
         </div>

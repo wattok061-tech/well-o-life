@@ -7,7 +7,7 @@ const services = [
   {
     id: 1,
     title: "Make a Donation",
-    description: "Contribute today to help fund treatments, research, and essential support services for those battling cancer.",
+    description: "Contribute today to help fund essential support services, community programs, and resources for those in need.",
     targetId: "donate",
     icon: (
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -16,28 +16,17 @@ const services = [
     ),
     footer: (
       <div className="flex items-center gap-3">
-        <div className="flex items-center gap-1.5">
-          {/* Apple Pay mock */}
-          <div className="w-6 h-6 bg-black rounded-full flex items-center justify-center">
-            <svg viewBox="0 0 384 512" className="w-3 h-3 text-white" fill="currentColor"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
-          </div>
-          {/* Google Pay mock */}
-          <div className="w-6 h-6 bg-white border border-gray-200 rounded-full flex items-center justify-center">
-            <svg viewBox="0 0 488 512" className="w-3 h-3" fill="#4285F4"><path d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z"/></svg>
-          </div>
-          {/* PayPal mock */}
-          <div className="w-6 h-6 bg-[#00457C] rounded-full flex items-center justify-center">
-            <svg viewBox="0 0 384 512" className="w-3 h-3 text-white" fill="currentColor"><path d="M111.4 295.9l-35.4 0c-5.8 0-10.9-4.3-11.8-10.1L2.7 18.2C1.6 10.4 7.6 3.2 15.5 3.2l139.1 0c43.3 0 76.5 10.3 93.3 43.4 11.2 22.1 12.7 48.7 4.2 74.3-15.2 45.7-53.8 68.2-101.5 68.2l-21.7 0c-7.6 0-14.1 5.5-15.3 13.1l-2.2 13.8z"/></svg>
-          </div>
+        <div className="w-12 h-6 bg-[#635BFF] rounded flex items-center justify-center">
+          <svg viewBox="0 0 60 24" className="w-8 h-4 text-white" fill="currentColor"><path d="M59.7 13.2c-.3-1.6-1.5-2.3-3.7-3.3-2.2-1-3.6-1.7-3.6-2.7 0-.9.9-1.5 2.5-1.5 1.4 0 3 .4 4.3 1.1l.6-3.2c-1.3-.6-2.8-1-4.3-1-4.5 0-7.5 2.5-7.5 6.1 0 2.3 1.3 3.6 4.3 5 2.8 1.3 3.6 1.9 3.6 2.8 0 1.2-1.1 1.7-2.8 1.7-2 0-3.9-.6-5.7-1.5l-.7 3.3c1.7.8 4.2 1.3 6.5 1.3 4.8 0 8.1-2.4 8.1-6.4 0-1.5-.4-2.7-1.3-3.6zM42.4 17.5c-1.4 0-2.5-1.2-2.5-2.7V6.6h-3.3V4.2h3.3V1.6l3.8-2.2v4.8h3.9v2.4h-3.9v7.8c0 1.6 1.1 2.7 2.5 2.7.7 0 1.3-.1 1.8-.3l.5 3.1c-.7.3-1.6.5-2.5.5zM29.5 17.5c-1.4 0-2.5-1.2-2.5-2.7V6.6h-3.3V4.2h3.3V1.6l3.8-2.2v4.8h3.9v2.4h-3.9v7.8c0 1.6 1.1 2.7 2.5 2.7.7 0 1.3-.1 1.8-.3l.5 3.1c-.7.3-1.6.5-2.5.5zM16.5 17.5c-1.4 0-2.5-1.2-2.5-2.7V6.6H10.7V4.2h3.3V1.6l3.8-2.2v4.8h3.9v2.4h-3.9v7.8c0 1.6 1.1 2.7 2.5 2.7.7 0 1.3-.1 1.8-.3l.5 3.1c-.7.3-1.6.5-2.5.5zM4.9 17.5c-1.4 0-2.5-1.2-2.5-2.7V6.6H.7V4.2h3.3V1.6l3.8-2.2v4.8h3.9v2.4H7.8v7.8c0 1.6 1.1 2.7 2.5 2.7.7 0 1.3-.1 1.8-.3l.5 3.1c-.7.3-1.6.5-2.5.5z"/></svg>
         </div>
-        <span className="text-[11px] font-bold text-gray-900 uppercase tracking-wider">Payment Options</span>
+        <span className="text-[11px] font-bold text-gray-900 uppercase tracking-wider">Secure Payment</span>
       </div>
     )
   },
   {
     id: 2,
     title: "Get Support",
-    description: "Access vital resources, financial aid, and counseling for cancer patients and their families in their time of need.",
+    description: "Access vital resources, financial aid, and counseling for individuals and families in their time of need.",
     targetId: "get-help",
     icon: (
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -47,14 +36,14 @@ const services = [
     footer: (
       <div className="flex items-center gap-3">
         <span className="text-xs font-bold text-gray-500 tracking-wide"># Financial Aid</span>
-        <span className="text-xs font-bold text-gray-500 tracking-wide"># Therapy</span>
+        <span className="text-xs font-bold text-gray-500 tracking-wide"># Counseling</span>
       </div>
     )
   },
   {
     id: 3,
     title: "Become a Volunteer",
-    description: "Join our team of volunteers to support cancer patients, assist with community outreach, and make a positive impact.",
+    description: "Join our team of volunteers to support our community outreach, assist those in need, and make a positive impact.",
     targetId: "volunteer",
     icon: (
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -164,7 +153,7 @@ export function WhatWeDo({ showLearnMore = true }: { showLearnMore?: boolean }) 
                 </div>
                 <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-3 md:mb-4">{service.title}</h3>
                 <p className="text-sm md:text-base text-gray-600 leading-relaxed mb-8 md:mb-12 flex-grow">{service.description}</p>
-                <div className="flex items-center justify-between mt-auto pt-4 border-t border-gray-100 md:border-none">
+                <div className="flex items-center justify-between mt-auto pt-6 border-t border-gray-100">
                   <div className="scale-90 md:scale-100 origin-left">{service.footer}</div>
                   <div className="w-10 h-10 shrink-0 rounded-full border border-gray-200 flex items-center justify-center group-hover:bg-gray-900 group-hover:border-gray-900 group-hover:text-white transition-colors text-gray-400">
                     <ArrowUpRight className="w-4 h-4" />

@@ -64,11 +64,8 @@ export function Navbar() {
 
   return (
     <>
-      <motion.nav 
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
-        className="fixed top-0 left-0 right-0 z-50 px-6 py-3 md:py-4 md:px-12 flex items-center justify-between text-[#0B2545] bg-[#F4EFE6]/90 backdrop-blur-lg border-b border-gray-200/50"
+      <nav 
+        className="fixed top-0 left-0 right-0 z-50 px-6 py-3 md:py-4 md:px-12 flex items-center justify-between text-[#0B2545] bg-[#F4EFE6] border-b border-gray-200/50"
       >
         <div className="flex-1 flex items-center space-x-3 min-w-0">
           <Link to="/" className="flex items-center">
@@ -95,7 +92,7 @@ export function Navbar() {
             <PremiumMenuIcon isOpen={isMenuOpen} />
           </button>
         </div>
-      </motion.nav>
+      </nav>
 
       <AnimatePresence>
         {isMenuOpen && (
