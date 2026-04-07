@@ -12,11 +12,9 @@ const positionStyles = [
 ];
 
 export function Updates({ showAll = false }: { showAll?: boolean }) {
-  const { news: updates, loading, error } = useNews();
+  const { news: allUpdates, loading, error } = useNews();
+  const updates = allUpdates ? allUpdates.slice(0, 5) : [];
   const [startIndex, setStartIndex] = useState(0);
-
-  if (loading) return <section className="py-24 bg-[#F3EFE7] text-center">Loading updates...</section>;
-  if (error) return <section className="py-24 bg-[#F3EFE7] text-center text-red-600">{error}</section>;
 
   if (showAll) {
     return (
@@ -25,42 +23,50 @@ export function Updates({ showAll = false }: { showAll?: boolean }) {
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight mb-16 text-center text-gray-900">
             All Stories
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {updates.map((update) => (
-              <Link to={`/update/${update.id}`} key={update.id} className="flex flex-col group cursor-pointer">
-                <div className="w-full aspect-[16/9] mb-5 overflow-hidden relative rounded-[40px]">
-                  <img 
-                    src={update.image} 
-                    alt={update.title}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                    referrerPolicy="no-referrer"
-                  />
-                </div>
-                <span className="text-sm text-gray-400 mb-2 font-medium">{update.date}</span>
-                <h3 className="text-lg md:text-xl font-bold leading-snug text-gray-800 group-hover:text-[#C69C38] transition-colors">
-                  {update.title}
-                </h3>
-              </Link>
-            ))}
-          </div>
+          {!updates || updates.length === 0 ? (
+            <div className="text-center py-12">
+              <p className="text-gray-600 text-lg">Check back soon for the latest news and updates.</p>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {updates.map((update) => (
+                <Link to={`/update/${update.id}`} key={update.id} className="flex flex-col group cursor-pointer">
+                  <div className="w-full aspect-[16/9] mb-5 overflow-hidden relative rounded-[40px]">
+                    <img 
+                      src={update.imageUrl || update.image} 
+                      alt={update.title}
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      referrerPolicy="no-referrer"
+                    />
+                  </div>
+                  <span className="text-sm text-gray-400 mb-2 font-medium">{update.date}</span>
+                  <h3 className="text-lg md:text-xl font-bold leading-snug text-gray-800 group-hover:text-[#C69C38] transition-colors">
+                    {update.title}
+                  </h3>
+                </Link>
+              ))}
+            </div>
+          )}
         </div>
       </section>
     );
   }
 
   const next = () => {
-    setStartIndex((prev) => (prev + 1) % updates.length);
+    setStartIndex((prev) => (prev + 1) % (updates?.length || 1));
   };
 
   const prev = () => {
-    setStartIndex((prev) => (prev - 1 + updates.length) % updates.length);
+    setStartIndex((prev) => (prev - 1 + (updates?.length || 1)) % (updates?.length || 1));
   };
 
   // Get 4 visible items, wrapping around if necessary
   const visibleItems = [];
-  for (let i = 0; i < 4; i++) {
-    const index = (startIndex + i) % updates.length;
-    visibleItems.push({ ...updates[index], posIndex: i });
+  if (updates && updates.length > 0) {
+    for (let i = 0; i < 4; i++) {
+      const index = (startIndex + i) % updates.length;
+      visibleItems.push({ ...updates[index], posIndex: i });
+    }
   }
 
   return (
@@ -89,65 +95,77 @@ export function Updates({ showAll = false }: { showAll?: boolean }) {
           </Link>
         </div>
 
-        {/* Carousel */}
-        <div className="relative w-full overflow-hidden pb-8">
-          <AnimatePresence mode="wait">
-            <motion.div 
-              key={startIndex}
-              initial={{ opacity: 0, filter: "blur(4px)", y: 10 }}
-              animate={{ opacity: 1, filter: "blur(0px)", y: 0 }}
-              exit={{ opacity: 0, filter: "blur(4px)", y: -10 }}
-              transition={{ duration: 0.4, ease: "easeInOut" }}
-              className="flex gap-4 md:gap-6 items-start w-full"
-            >
-              {visibleItems.map((update, idx) => {
-                const style = positionStyles[idx];
-                return (
-                  <Link 
-                    to={`/update/${update.id}`}
-                    key={`${update.id}-${update.posIndex}`}
-                    className={`${style.width} ${style.opacity} flex flex-col group cursor-pointer transition-all duration-500`}
-                  >
-                    {/* Image Container */}
-                    <div className={`w-full ${style.aspect} mb-6 overflow-hidden relative rounded-[2.5rem] transition-all duration-300`}>
-                      <img 
-                        src={update.image} 
-                        alt={update.title}
-                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                        referrerPolicy="no-referrer"
-                      />
-                    </div>
-                    
-                    {/* Text Content */}
-                    <span className="text-xs font-bold text-gray-500 mb-2 uppercase tracking-widest">{update.date}</span>
-                    <h3 className="text-lg font-bold leading-snug text-[#0B2545] group-hover:text-[#C69C38] transition-colors">
-                      {update.title}
-                    </h3>
-                  </Link>
-                );
-              })}
-            </motion.div>
-          </AnimatePresence>
-        </div>
+        {/* Content Area */}
+        {loading ? (
+          <div className="text-center py-12">
+            <p className="text-gray-600 text-lg">Loading updates...</p>
+          </div>
+        ) : error || !updates || updates.length === 0 ? (
+          <div className="text-center py-12">
+            <p className="text-gray-600 text-lg">Check back soon for the latest news and updates.</p>
+          </div>
+        ) : (
+          <>
+            {/* Carousel */}
+            <div className="relative w-full overflow-hidden pb-8">
+              <AnimatePresence mode="wait">
+                <motion.div 
+                  key={startIndex}
+                  initial={{ opacity: 0, filter: "blur(4px)", y: 10 }}
+                  animate={{ opacity: 1, filter: "blur(0px)", y: 0 }}
+                  exit={{ opacity: 0, filter: "blur(4px)", y: -10 }}
+                  transition={{ duration: 0.4, ease: "easeInOut" }}
+                  className="flex gap-4 md:gap-6 items-start w-full"
+                >
+                  {visibleItems.map((update, idx) => {
+                    const style = positionStyles[idx];
+                    return (
+                      <Link 
+                        to={`/update/${update.id}`}
+                        key={`${update.id}-${update.posIndex}`}
+                        className={`${style.width} ${style.opacity} flex flex-col group cursor-pointer transition-all duration-500`}
+                      >
+                        {/* Image Container */}
+                        <div className={`w-full ${style.aspect} mb-6 overflow-hidden relative rounded-[2.5rem] transition-all duration-300`}>
+                          <img 
+                            src={update.imageUrl || update.image} 
+                            alt={update.title}
+                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                            referrerPolicy="no-referrer"
+                          />
+                        </div>
+                        
+                        {/* Text Content */}
+                        <span className="text-xs font-bold text-gray-500 mb-2 uppercase tracking-widest">{update.date}</span>
+                        <h3 className="text-lg font-bold leading-snug text-[#0B2545] group-hover:text-[#C69C38] transition-colors">
+                          {update.title}
+                        </h3>
+                      </Link>
+                    );
+                  })}
+                </motion.div>
+              </AnimatePresence>
+            </div>
 
-        {/* Navigation Buttons */}
-        <div className="flex justify-end items-center space-x-4 mt-8">
-          <button 
-            onClick={prev}
-            className="w-12 h-12 rounded-full border border-gray-300 flex items-center justify-center text-[#0B2545] hover:border-[#0B2545] transition-colors focus:outline-none"
-            aria-label="Previous updates"
-          >
-            <ArrowLeft className="w-5 h-5" />
-          </button>
-          <button 
-            onClick={next}
-            className="w-12 h-12 rounded-full bg-[#C69C38] text-white flex items-center justify-center hover:bg-[#1E3A8A] transition-colors shadow-lg focus:outline-none"
-            aria-label="Next updates"
-          >
-            <ArrowRight className="w-5 h-5" />
-          </button>
-        </div>
-
+            {/* Navigation Buttons */}
+            <div className="flex justify-end items-center space-x-4 mt-8">
+              <button 
+                onClick={prev}
+                className="w-12 h-12 rounded-full border border-gray-300 flex items-center justify-center text-[#0B2545] hover:border-[#0B2545] transition-colors focus:outline-none"
+                aria-label="Previous updates"
+              >
+                <ArrowLeft className="w-5 h-5" />
+              </button>
+              <button 
+                onClick={next}
+                className="w-12 h-12 rounded-full bg-[#C69C38] text-white flex items-center justify-center hover:bg-[#1E3A8A] transition-colors shadow-lg focus:outline-none"
+                aria-label="Next updates"
+              >
+                <ArrowRight className="w-5 h-5" />
+              </button>
+            </div>
+          </>
+        )}
       </div>
     </section>
   );
